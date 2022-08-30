@@ -179,29 +179,46 @@ logo.classList.contains("c");
 // }
 
 //class declaration
-class PersonCl {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
-  get age() {
-    return 2037 - this.birthYear;
-  }
-  greet() {
-    console.log(`Hey ${this.firstName}`);
-  }
-  set fullName(name) {
-    if (name.include(" ")) {
-      this.fullName = name;
-    } else {
-      alert(`${name} is not a full name!`);
-    }
-  }
-}
+// class PersonCl {
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
+//   get age() {
+//     return 2037 - this.birthYear;
+//   }
+//   greet() {
+//     console.log(`Hey ${this.firstName}`);
+//   }
 
-const jessica = new PersonCl("Jessica Davis", 1996);
-console.log(jessica);
-console.log(jessica.age);
+//   // Set a property that already exist
+//   set fullName(name) {
+//     if (name.includes(" ")) {
+//       this._fullName = name;
+//     } else {
+//       alert(`${name} is not a full name!`);
+//     }
+//   }
+
+//   get fullName() {
+//     return this._fullName;
+//   }
+
+//   //Static Method
+//   static hey(){
+//     console.log('Hey there 👌');
+//     console.log(this);
+//   }
+// }
+
+// PersonCl.hey = function () {
+//   console.log("Hi there!!!!");
+// };
+
+// PersonCl.hey();
+// const jessica = new PersonCl("Jessica Davis", 1996);
+// console.log(jessica);
+// console.log(jessica.age);
 
 // // PersonCl.prototype.greet = function () {
 // //   console.log(`Hey ${this.firstName}`);
@@ -224,3 +241,25 @@ console.log(jessica.age);
 // console.log(account.latest);
 // account.latest = 50;
 // console.log(account);
+
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+console.log(steven);
+
+steven.name = "Steven";
+steven.birthYear = 2002;
+steven.calcAge();
+
+console.log(steven.__proto__);
+const sarah = Object.create(PersonProto);
+sarah.init("Sarah", 2139);
+sarah.calcAge();
