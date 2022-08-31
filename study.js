@@ -242,24 +242,53 @@ logo.classList.contains("c");
 // account.latest = 50;
 // console.log(account);
 
-const PersonProto = {
-  calcAge() {
-    console.log(2037 - this.birthYear);
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   },
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
+
+// const steven = Object.create(PersonProto);
+// console.log(steven);
+
+// steven.name = "Steven";
+// steven.birthYear = 2002;
+// steven.calcAge();
+
+// console.log(steven.__proto__);
+// const sarah = Object.create(PersonProto);
+// sarah.init("Sarah", 2139);
+// sarah.calcAge();
+
+const Car = {
+  init(type, speed) {
+    this.type = type;
+    this.speed = speed;
   },
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
+  acceleration() {
+    this.speed += 10;
+    console.log(`${this.type} acceleration: ${this.speed}`);
+  },
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.type} braking: ${this.speed}`);
+  },
+  get speedUS() {
+    return this.speed / 1.6;
+  },
+  set speedUS(newSpeed) {
+    this.speed = newSpeed * 1.6;
   },
 };
 
-const steven = Object.create(PersonProto);
-console.log(steven);
-
-steven.name = "Steven";
-steven.birthYear = 2002;
-steven.calcAge();
-
-console.log(steven.__proto__);
-const sarah = Object.create(PersonProto);
-sarah.init("Sarah", 2139);
-sarah.calcAge();
+const Ford = Object.create(Car);
+Ford.init("Ford", 120);
+Ford.acceleration();
+Ford.brake();
+console.log(Ford.speedUS);
+Ford.speedUS = 1000;
+console.log(Ford.speedUS);
